@@ -1,0 +1,11 @@
+extends base.jade
+block title
+  <title>{{activeChannelData.channel.title|trim|escape}}</title>
+block canonical
+  <link rel="canonical" href="http://{{domain}}/{{ activeChannelData.channel.titleTextEncoded|trim|replace({'_': '-'}) }}/{{ activeChannelData.video.titleTextEncoded|trim|replace({'_': '-'}) }}/{{activeChannelData.channel.id}}-{{activeChannelData.playlist.id}}-{{activeChannelData.video.id}}">
+block meta
+  | {{tvsite_meta_active_video()}}
+
+block content
+  | {{tvsite_cartridge_idstring('header')}}
+  p Playback content here

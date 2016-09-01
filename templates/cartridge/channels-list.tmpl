@@ -1,0 +1,7 @@
+
+<div>
+  {% for items in LIST|batch(3, "None") %}
+  {% for item in items %}
+  <p>{{item.channelId.title}}</p>{% endfor %}
+  {% endfor %}
+</div>

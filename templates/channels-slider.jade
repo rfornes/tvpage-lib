@@ -1,0 +1,13 @@
+//- - each product in products
+//-   p #{product.title}
+    
+//-     div.product-holder
+//-         +productBlock("Offers", product.offers)
+//-       button.action.button(value="buy") #{product.actionText}
+
+//- mixin productBlock(title,offers)
+//-   div.product
+//-     p= title
+//-     ul
+//-       - each offer in offers
+//-         li  #{offer}

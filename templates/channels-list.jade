@@ -1,0 +1,11 @@
+div
+  | {% for items in LIST|batch(3, "None") %}
+  | {% for item in items %}
+  
+  p {{item.channelId.title}}
+  
+  | {% endfor %}
+  | {% endfor %}
+
+mixin channelBlock()
+  a.channel

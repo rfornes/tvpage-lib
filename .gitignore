@@ -1,0 +1,21 @@
+### General ###
+.dropbox
+*~
+.DS_Store
+Icon
+Icon^M
+
+### Node ###
+.npm
+logs
+*.log
+node_modules
+npm-debug.log
+jspm_packages
+
+### Grunt ###
+.grunt
+
+### Sass ###
+.sass-cache/
+*.css.map
