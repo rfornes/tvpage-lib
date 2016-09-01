@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     watch : {
       templates : {
         files : ['templates/**'],
-        tasks : ['twigRender']
+        tasks : ['twigRender','htmlmin:dist']
       },
       'lib-js' : {
         files : ['src/**/*.js'],
@@ -74,6 +74,19 @@ module.exports = function(grunt) {
           }
         ]
       },
+    },
+    htmlmin: {                                 
+      dist: {                                     
+        options: { 
+        removeComments: true,
+        collapseWhitespace: true
+        },
+        files: {                                
+          'templates/page/channel.tmpl': 'templates/page/channel.tmpl',
+          'templates/page/home.tmpl': 'templates/page/home.tmpl',
+          'templates/page/playback.tmpl': 'templates/page/playback.tmpl' 
+        }
+      }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-requirejs');
@@ -83,6 +96,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-twig-render');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
   
   // grunt.registerTask('lib-css',['clean:lib-css','sass','autoprefixer','copy:lib-css','watch:lib-css']);
   // grunt.registerTask('lib-js',['clean:lib-js','requirejs','copy:lib-js','watch:lib-js']);

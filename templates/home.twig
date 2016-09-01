@@ -1,6 +1,9 @@
 {% extends 'base.twig' %}
 
-
+{% block layout %}
+	{{components.channelsList}}
+	{{components.channelsSlider}}
+{% endblock %}
 
 {% block javascripts %}
 	{{ parent() }}

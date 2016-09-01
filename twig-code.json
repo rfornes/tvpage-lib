@@ -1,7 +1,11 @@
 {
   "domain": "{{domain}}",
+  "components":{
+  	"channelsList":"{{tvsite_cartridge_idstring(\"channels-list\")}}",
+  	"channelsSlider":"{{tvsite_cartridge_idstring(\"channels-slider\")}}"
+  },
   "home" : {
-  	"title": "{{siteTitle ~ \" | \" ~ pageTitle}}",
+  	"title": "{{siteTitle}}",
   	"image": "http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg",
   	"canonicalUrl": "http://{{domain}}/",
   	"jsPath": "{{TVP_CDN_TVSITE}}/assets/js/home.js"

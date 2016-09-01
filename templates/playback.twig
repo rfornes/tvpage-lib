@@ -12,6 +12,10 @@
 	{{playback.meta}}
 {% endblock %}
 
+{% block layout %}
+	<h1>Playback</h1>
+{% endblock %}
+
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{playback.jsPath}}"></script>

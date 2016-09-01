@@ -1,0 +1,11 @@
+{% for items in LIST|batch(3, "None") %}
+	<div class="row">
+		{% for item in items %}
+	    	{% if item.channelId.id %}
+	    		<a title="{{item.channelId.title}}" href="{{tvsite_base_url()}}/c/{{item.channelId.titleTextEncoded|replace({'_': '-'})}}/{{item.channelId.id}}--" class="channel">
+	    			<div class="poster-cover channel-img" data-original="{{TVP_CDN_TVSITE}}/src/img/channels/{{item.channelImage}}"></div>
+	    		</a>
+	    	{% endif %}
+	  	{% endfor %}
+	</div>
+{% endfor %}
