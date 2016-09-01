@@ -75,7 +75,7 @@ module.exports = function(grunt) {
           'templates/page/channel.tmpl': 'templates/channel.jade',
           'templates/cartridge/header.tmpl': 'templates/header.jade',
           'templates/cartridge/channels-list.tmpl': 'templates/channels-list.jade',
-          'templates/cartridge/channel-slider.tmpl': 'templates/channels-slider.jade'
+          'templates/cartridge/channels-slider.tmpl': 'templates/channels-slider.jade'
         }
       }
     },
