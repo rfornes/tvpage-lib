@@ -1,0 +1,21 @@
+{
+  "domain": "{{domain}}",
+  "home" : {
+  	"title": "{{siteTitle ~ \" | \" ~ pageTitle}}",
+  	"image": "http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg",
+  	"canonicalUrl": "http://{{domain}}/",
+  	"jsPath": "{{TVP_CDN_TVSITE}}/assets/js/home.js"
+  },
+  "playback" : {
+  	"title": "{{activeChannelData.video.title|trim|escape}}",
+  	"canonicalUrl": "http://{{domain}}/{{ activeChannelData.channel.titleTextEncoded|trim|replace({'_': '-'}) }}/{{ activeChannelData.video.titleTextEncoded|trim|replace({'_': '-'}) }}/{{activeChannelData.channel.id}}-{{activeChannelData.playlist.id}}-{{activeChannelData.video.id}}",
+  	"meta":"{{tvsite_meta_active_video()}}",
+  	"jsPath": "{{TVP_CDN_TVSITE}}/assets/js/playback.js"
+  },
+  "channel" : {
+  	"title": "{{activeChannelData.channel.title|trim|escape}}",
+  	"canonicalUrl": "http://{{domain}}/c/{{ activeChannelData.channel.titleTextEncoded|trim|replace({'_': '-'}) }}/{{activeChannelData.channel.id}}--",
+  	"meta":"{{tvsite_meta_active_video()}}",
+  	"jsPath": "{{TVP_CDN_TVSITE}}/assets/js/channel.js"
+  }
+}

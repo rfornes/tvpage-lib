@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+
+{% block title %}
+	<title>{{playback.title}}</title>
+{% endblock %}
+
+{% block canonical %}
+	<link rel="canonical" href="{{playback.canonicalUrl}}">
+{% endblock %}
+
+{% block meta %}
+	{{playback.meta}}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{playback.jsPath}}"></script>
+{% endblock %}

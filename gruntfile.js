@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     watch : {
       templates : {
         files : ['templates/**'],
-        tasks : ['jade']
+        tasks : ['twigRender']
       },
       'lib-js' : {
         files : ['src/**/*.js'],
@@ -61,35 +61,33 @@ module.exports = function(grunt) {
         }
       }
     },
-    jade: {
-      compile: {
-        options: {
-          pretty: true,
-          data: {
-            products: grunt.file.readJSON('data/products.json')
+    twigRender: {
+      templates: {
+        files : [
+          {
+            data: 'twig-code.json',
+            expand: true,
+            cwd: 'templates/',
+            src: ['**/*.twig', '!**/_*.twig', '!base.twig', '!classic.twig', '!grid-layout.twig','!meta.twig'],
+            dest: 'templates/page/',
+            ext: '.tmpl'
           }
-        },
-        files: {
-          'templates/page/home.tmpl': 'templates/home.jade',
-          'templates/page/playback.tmpl': 'templates/playback.jade',
-          'templates/page/channel.tmpl': 'templates/channel.jade',
-          'templates/cartridge/header.tmpl': 'templates/header.jade',
-          'templates/cartridge/channels-list.tmpl': 'templates/channels-list.jade',
-          'templates/cartridge/channels-slider.tmpl': 'templates/channels-slider.jade'
-        }
-      }
-    },
+        ]
+      },
+    }
   });
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-twig-render');
   
-  grunt.registerTask('lib-css',['clean:lib-css','sass','autoprefixer','copy:lib-css','watch:lib-css']);
-  grunt.registerTask('lib-js',['clean:lib-js','requirejs','copy:lib-js','watch:lib-js']);
-  grunt.registerTask('templates',['clean:templates','jade','watch:templates']);
+  // grunt.registerTask('lib-css',['clean:lib-css','sass','autoprefixer','copy:lib-css','watch:lib-css']);
+  // grunt.registerTask('lib-js',['clean:lib-js','requirejs','copy:lib-js','watch:lib-js']);
+  // grunt.registerTask('templates',['clean:templates','jade','watch:templates']);
+
+  grunt.registerTask('templates',['clean:templates','twigRender','watch:templates']);
 
 };

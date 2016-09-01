@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr"><title>{{activeChannelData.channel.title|trim|escape}}</title><link rel="canonical" href="https://{{domain}}/c/{{ activeChannelData.channel.titleTextEncoded|trim|replace({'_': '-'}) }}/{{activeChannelData.channel.id}}--">{{tvsite_meta_active_video()}}
-  <body>
-    <p>Channel page</p>
-    <footer></footer>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="//dev1.tvpage.com/tvsite/tvpage/tvpage-js"></script>
-    <script>
-      if (window.tvpage) {
-      	console.log(tvpage);
-      }
-    </script>
-  </body>
+<html>
+  
+  	<title>{{activeChannelData.channel.title|trim|escape}}</title>
+  
+  	<link rel="canonical" href="http://{{domain}}/c/{{ activeChannelData.channel.titleTextEncoded|trim|replace({'_': '-'}) }}/{{activeChannelData.channel.id}}--">
+  
+  	{{tvsite_meta_active_video()}}
+  
+  <body class="default">
+      </body>
+  
+  	  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="//dev1.tvpage.com/tvsite/tvpage/tvpage-js"></script>
+  
+	<script src="{{TVP_CDN_TVSITE}}/assets/js/channel.js"></script>
+  
 </html>

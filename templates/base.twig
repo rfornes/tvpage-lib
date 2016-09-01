@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  
+  {% block title %}
+  	<title>{{home.title}}</title>
+  {% endblock %}
+  
+  {% block canonical %}
+  	<link rel="canonical" href="http://{{domain}}/"/>
+  {% endblock %}
+  
+  {% block meta %}
+  	{% include 'meta.twig' %}
+  {% endblock %}
+  
+  <body class="{% block theme %}default{% endblock %}">
+    {% block layout %}{% endblock %}
+  </body>
+  
+  {% block javascripts %}
+  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="//dev1.tvpage.com/tvsite/tvpage/tvpage-js"></script>
+  {% endblock %}
+  
+</html>
