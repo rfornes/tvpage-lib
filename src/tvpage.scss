@@ -1,62 +1,26 @@
-@mixin clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+// Using both https://github.com/JohnAlbin/normalize-scss &&  https://milligram.github.io (very light)
+// as a base for our scss.
+@import "base";
+
+label {
+	text-transform: capitalize;
 }
 
-@mixin aspect-ratio($width, $height) {
-  position: relative;
-  &:before {
-    display: block;
-    content: "";
-    width: 100%;
-    padding-top: ($height / $width) * 100%;
-  }
-  > .content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-}
-
-.player,
-.player-content {
-	@include clearfix;
-	background-color: black;
-	position: relative;
-	&:before{
-		display: block;
-		content: "";
-		width: 100%;
-		padding-top: 56.25%;
-	}	
-	> div {
-		position: absolute !important;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		margin: auto;
+.gallery-grid {
+	.row {
+		margin-bottom: 1.35%;
 	}
 }
 
-.search-box {
+.thumbnail {
 	display: block;
-    margin: 0;
-    padding: 0 0 0 10px;
-    height: 32px;
-    line-height: 32px;
-    padding-left: 10px;
-    border: 1px solid gray;
-    font-weight: lighter;
-    box-sizing: border-box;
-    &:focus {
-		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(169, 169, 169, 0.6);
-		border-color: darkgray;
-		outline: 0;
-    }
+	padding: 3px;
+	border: 1px solid white;
+}
+
+.pagination {
+	text-align: center;
+	> li {
+		display: inline;
+	}
 }

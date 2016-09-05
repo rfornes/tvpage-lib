@@ -1,0 +1,17 @@
+{% if <%= items %>|length %}
+	<div class="container">
+		{% for row in <%= items %>|batch( DATA.perRow is defined ? DATA.perRow : 4, "None") %}
+			<div class="row">
+				{% for item in row %}
+					{% if item.id %}
+						<div class="column">
+							<%= itemTemplate %>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		{% else %}
+			no videos
+		{% endfor %}
+	</div>
+{% endif %}

@@ -1,0 +1,15 @@
+<ul class="pagination">
+  <li>
+    <a href="#" class="pagination-arrow">
+      <span>&laquo;</span>
+    </a>
+  </li>
+  {% for item in 0..<%= pages %> %}
+    <li><a href="#">{{item}}</a></li>
+  {% endfor %}
+  <li>
+    <a href="#" class="pagination-arrow">
+      <span>&raquo;</span>
+    </a>
+  </li>
+</ul>

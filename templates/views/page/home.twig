@@ -1,8 +1,8 @@
 {% extends 'base.twig' %}
 
-{% block layout %}
-	{{components.channelsList}}
-	{{components.channelsSlider}}
+{% block main %}
+	{{ cartridge('products-list-a') }}
+	{{ cartridge('videos-gallery-a') }}
 {% endblock %}
 
 {% block javascripts %}

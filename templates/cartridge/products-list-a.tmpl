@@ -1,0 +1,7 @@
+<div class="related-list">{% if products|length %}
+	<ul>
+		{% for item in products %}
+			<li>{{item.title}}</li>
+		{% endfor %}
+	</ul>
+{% endif %}</div/>

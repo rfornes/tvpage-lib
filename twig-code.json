@@ -1,9 +1,6 @@
 {
+  "assetsUrl":"{{TVP_CDN_TVSITE}}",
   "domain": "{{domain}}",
-  "components":{
-  	"channelsList":"{{tvsite_cartridge_idstring(\"channels-list\")}}",
-  	"channelsSlider":"{{tvsite_cartridge_idstring(\"channels-slider\")}}"
-  },
   "home" : {
   	"title": "{{siteTitle}}",
   	"image": "http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg",

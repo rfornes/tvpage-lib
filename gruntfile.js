@@ -1,9 +1,12 @@
+var Gen = require('./templates/generator');
+
 module.exports = function(grunt) {
+
   grunt.initConfig({
     watch : {
       templates : {
-        files : ['templates/**'],
-        tasks : ['twigRender','htmlmin:dist']
+        files : ['gruntfile.js','templates/views/**/*.twig'],
+        tasks : ['twigRender']
       },
       'lib-js' : {
         files : ['src/**/*.js'],
@@ -27,18 +30,18 @@ module.exports = function(grunt) {
           noCache: true,
           sourcemap: false,
           compas: true,
-          require: ['breakpoint'],
+          require: ['breakpoint','susy'],
           style: 'expanded'
         },
         files: {
-          'dist/tvpage-css.tmpl' : 'src/tvpage.scss'
+          'dist/tvpage-css.css' : 'src/tvpage.scss'
         }
       }
     },
     clean: {
       'lib-js': 'dist/tvpage-js.tmpl',
       'lib-css': 'dist/tvpage-css.tmpl',
-      templates: ['templates/page','templates/cartridge']
+      templates: ['templates/page/*.tmpl','templates/cartridge/*.tmpl']
     },
     copy: {
       'lib-js': {
@@ -57,31 +60,58 @@ module.exports = function(grunt) {
     autoprefixer:{
       css:{
         files: {    
-          'dist/tvpage-css.tmpl':'dist/tvpage-css.tmpl'
+          'dist/tvpage-css.css':'dist/tvpage-css.css'
         }
       }
     },
     twigRender: {
-      templates: {
+      options: {
+        extensions:[
+          function(Twig){
+            Twig.exports.extendFunction('cartridge',function(name){
+              return "{{ tvsite_cartridge_idstring(\""+name+"\")}}";
+            });
+          },
+          function(Twig){
+            Twig.exports.extendFunction('widget',function(entity, options){
+              return Gen.generate(options.component,entity,options);
+            });
+          }
+        ]
+      },
+      pages: {
         files : [
           {
             data: 'twig-code.json',
             expand: true,
-            cwd: 'templates/',
-            src: ['**/*.twig', '!**/_*.twig', '!base.twig', '!classic.twig', '!grid-layout.twig','!meta.twig'],
+            cwd: 'templates/views/page',
+            src: ['**/*.twig', '!**/_*.twig', '!base.twig','!meta.twig'],
             dest: 'templates/page/',
             ext: '.tmpl'
           }
         ]
       },
+      cartridges: {
+        files : [
+          {
+            data: 'twig-code.json',
+            expand: true,
+            cwd: 'templates/views/cartridge/',
+            src: ['**/*.twig', '!**/_*.twig', '!macros.twig'],
+            dest: 'templates/cartridge/',
+            ext: '.tmpl'
+          }
+        ]
+      }
     },
-    htmlmin: {                                 
-      dist: {                                     
+    htmlmin: {
+      templates: {
         options: { 
-        removeComments: true,
-        collapseWhitespace: true
+          removeComments: false,
+          collapseWhitespace: true,
+          conservativeCollapse: true
         },
-        files: {                                
+        files: {
           'templates/page/channel.tmpl': 'templates/page/channel.tmpl',
           'templates/page/home.tmpl': 'templates/page/home.tmpl',
           'templates/page/playback.tmpl': 'templates/page/playback.tmpl' 
@@ -89,6 +119,7 @@ module.exports = function(grunt) {
       }
     }
   });
+  
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
@@ -97,11 +128,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-twig-render');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  
-  // grunt.registerTask('lib-css',['clean:lib-css','sass','autoprefixer','copy:lib-css','watch:lib-css']);
-  // grunt.registerTask('lib-js',['clean:lib-js','requirejs','copy:lib-js','watch:lib-js']);
-  // grunt.registerTask('templates',['clean:templates','jade','watch:templates']);
 
-  grunt.registerTask('templates',['clean:templates','twigRender','watch:templates']);
+  grunt.registerTask('lib-css',['clean:lib-css','sass','autoprefixer','watch:lib-css']);
+  grunt.registerTask('lib-templates',['clean:templates','twigRender', 'htmlmin', 'watch:templates']);
 
 };
