@@ -23,12 +23,13 @@ define(function(require){
 		playerInstance[ action + 'Video' ](asset);
 	};
 
-	var player = function(selector,settings,list){
+	var player = function(selector,settings){
 		
 		$el = $(selector);
 		if (!$el.length) return false;
+		this.el = $el.eq(0);
 
-		playList = list;
+		playList = settings.playList || [];
 		setts.divId = selector.replace('#','');
 		setts = $.extend(settings, setts);
 		

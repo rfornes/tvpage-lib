@@ -1,6 +1,6 @@
-<div class="gallery-search-bar"><div class="container">
+<section class="videos-gallery"><div class="search-bar"><div class="container">
 	<div class="row">
-		<div class="column">
+		<div class="column column-50">
 			<label for="search">Search by text</label>
 			<input type="text" placeholder="Search some" id="search">
 		</div>
@@ -15,13 +15,13 @@
 			</div>	
 		{% endfor %}
 	</div>
-</div></div/><div class="gallery-grid">{% if channel.videos|length %}
+</div></div/><div class="grid">{% if channel.videos|length %}
 	<div class="container">
 		{% for row in channel.videos|batch( DATA.perRow is defined ? DATA.perRow : 4, "None") %}
 			<div class="row">
 				{% for item in row %}
 					{% if item.id %}
-						<div class="column">
+						<div class="column video-play" data-video-id={{item.id}}>
 							<div class="thumbnail"><a href="#" class="thumbnail">
 	<img src="{{item.asset.thumbnailUrl}}" alt="{{item.title}}">
 </a></div/><p>{{item.title|slice(0, 40)}}</p>
@@ -33,7 +33,7 @@
 			no videos
 		{% endfor %}
 	</div>
-{% endif %}</div/><div class="gallery-pagination"><ul class="pagination">
+{% endif %}</div/><div class="pagination"><ul class="pagination">
   <li>
     <a href="#" class="pagination-arrow">
       <span>&laquo;</span>
@@ -48,3 +48,21 @@
     </a>
   </li>
 </ul></div/>
+
+	
+	
+		
+	
+	{% if ( channel and channel.videos ) %}
+
+<script type='text/javascript'>
+  TVSite = window.TVSite || {};
+  
+  	
+  		TVSite[ 'playList' ] = {{channel.videos|json_encode()}}
+  	
+  
+</script>
+
+{% endif %}
+</section>

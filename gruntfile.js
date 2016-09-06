@@ -41,7 +41,7 @@ module.exports = function(grunt) {
     clean: {
       'lib-js': 'dist/tvpage-js.tmpl',
       'lib-css': 'dist/tvpage-css.tmpl',
-      templates: ['templates/page/*.tmpl','templates/cartridge/*.tmpl']
+      templates: ['templates/page/*.tmpl','templates/cartridge/*.tmpl', '!templates/page/tvpage-js.tmpl']
     },
     copy: {
       'lib-js': {
@@ -68,13 +68,8 @@ module.exports = function(grunt) {
       options: {
         extensions:[
           function(Twig){
-            Twig.exports.extendFunction('cartridge',function(name){
-              return "{{ tvsite_cartridge_idstring(\""+name+"\")}}";
-            });
-          },
-          function(Twig){
-            Twig.exports.extendFunction('widget',function(entity, options){
-              return Gen.generate(options.component,entity,options);
+            Twig.exports.extendFunction('widget',function(name,options){
+              return Gen.generate(name,options);
             });
           }
         ]
@@ -108,8 +103,8 @@ module.exports = function(grunt) {
       templates: {
         options: { 
           removeComments: false,
-          collapseWhitespace: true,
-          conservativeCollapse: true
+          //conservativeCollapse: true,
+          //collapseWhitespace: true,
         },
         files: {
           'templates/page/channel.tmpl': 'templates/page/channel.tmpl',
@@ -129,6 +124,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-twig-render');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
+  grunt.registerTask('lib-js',['clean:lib-js','requirejs','copy','watch:lib-js']);
   grunt.registerTask('lib-css',['clean:lib-css','sass','autoprefixer','watch:lib-css']);
   grunt.registerTask('lib-templates',['clean:templates','twigRender', 'htmlmin', 'watch:templates']);
 

@@ -1067,4 +1067,23 @@ label {
   display: inline;
 }
 
+.player > div {
+  background-color: black;
+  position: relative;
+}
+.player > div:before {
+  display: block;
+  content: "";
+  width: 100%;
+  padding-top: 56.25%;
+}
+.player > div > div {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
 /*# sourceMappingURL=tvpage-css.css.map */
