@@ -18,14 +18,14 @@ label {
 	border: 1px solid white;
 }
 
-.pagination {
+.pages-list {
 	text-align: center;
 	> li {
 		display: inline;
 	}
 }
 
-.player > div {
+#player-cartridge {
 	background-color:black;
 	position: relative;
 	&:before{
@@ -34,7 +34,7 @@ label {
 		width: 100%;
 		padding-top: 56.25%;
 	}	
-	> div {
+	.player-holder {
 		position: absolute !important;
 		top: 0;
 		left: 0;

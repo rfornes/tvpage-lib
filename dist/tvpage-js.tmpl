@@ -392,7 +392,7 @@ var requirejs, require, define;
 }());
 define("vendor/almond", function(){});
 
-define('src/events',['require','jquery'],function(require){
+define('src/js/events',['require','jquery'],function(require){
   
   	var $ = require('jquery');
 
@@ -413,7 +413,7 @@ define('src/events',['require','jquery'],function(require){
 
   	return events;
 });
-define('src/plugins',[],function(){
+define('src/js/plugins',[],function(){
   
   /*!
  * jQuery throttle / debounce - v1.1 - 3/7/2010
@@ -516,7 +516,7 @@ define('src/plugins',[],function(){
   })(this);
   
 });
-define('src/player',['require','jquery'],function(require){
+define('src/js/player',['require','jquery'],function(require){
 
 	var $ = require('jquery');
 
@@ -605,7 +605,7 @@ define('src/player',['require','jquery'],function(require){
 	return player;
 
 });
-define('src/load',['require','jquery'],function(require){
+define('src/js/load',['require','jquery'],function(require){
   
   	var $ = require('jquery');
 
@@ -635,7 +635,7 @@ define('src/load',['require','jquery'],function(require){
     return load;
 
 });
-define('src/search',['require','jquery'],function(require){
+define('src/js/search',['require','jquery'],function(require){
   
 	var $ = require('jquery');
   
@@ -699,23 +699,23 @@ define('src/search',['require','jquery'],function(require){
   return search;
 
 });
-define('src/tvpage',['require','src/events','src/plugins','src/player','src/load','src/search'],function(require){
+define('src/js/tvpage',['require','src/js/events','src/js/plugins','src/js/player','src/js/load','src/js/search'],function(require){
   
-  var events = require('src/events');
+  var events = require('src/js/events');
 
-  require('src/plugins');
+  require('src/js/plugins');
 
   return {
   	VERSION: '0.0.0',
-  	player: require('src/player'),
+  	player: require('src/js/player'),
   	subscribe: events.subscribe,
   	unsubscribe: events.unsubscribe,
   	publish: events.publish,
-  	load: require('src/load'),
-    search: require('src/search')
+  	load: require('src/js/load'),
+    search: require('src/js/search')
   };
   
 });
   define('jquery',function(){ return $; });
-  return require('src/tvpage');
+  return require('src/js/tvpage');
 }));

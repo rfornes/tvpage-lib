@@ -1060,24 +1060,24 @@ label {
   border: 1px solid white;
 }
 
-.pagination {
+.pages-list {
   text-align: center;
 }
-.pagination > li {
+.pages-list > li {
   display: inline;
 }
 
-.player > div {
+#player-cartridge {
   background-color: black;
   position: relative;
 }
-.player > div:before {
+#player-cartridge:before {
   display: block;
   content: "";
   width: 100%;
   padding-top: 56.25%;
 }
-.player > div > div {
+#player-cartridge .player-holder {
   position: absolute !important;
   top: 0;
   left: 0;

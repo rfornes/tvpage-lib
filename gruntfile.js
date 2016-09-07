@@ -1,19 +1,19 @@
-var Gen = require('./templates/generator');
+var Generator = require('./generator');
 
 module.exports = function(grunt) {
 
   grunt.initConfig({
     watch : {
       templates : {
-        files : ['gruntfile.js','templates/views/**/*.twig'],
+        files : ['gruntfile.js','src/views/**/*.twig'],
         tasks : ['twigRender']
       },
       'lib-js' : {
-        files : ['src/**/*.js'],
+        files : ['src/js/**/*.js'],
         tasks : ['clean:lib-js','requirejs','copy']
       },
       'lib-css' : {
-        files : ['src/**/*.scss'],
+        files : ['src/scss/**/*.scss'],
         tasks : ['clean:lib-css','sass','copy:lib-css']
       }
     },
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
           style: 'expanded'
         },
         files: {
-          'dist/tvpage-css.css' : 'src/tvpage.scss'
+          'dist/tvpage-css.css' : 'src/scss/tvpage.scss'
         }
       }
     },
@@ -68,8 +68,8 @@ module.exports = function(grunt) {
       options: {
         extensions:[
           function(Twig){
-            Twig.exports.extendFunction('widget',function(name,options){
-              return Gen.generate(name,options);
+            Twig.exports.extendFunction('cartridge',function(name,options){
+              return Generator.generate(name,options);
             });
           }
         ]
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
           {
             data: 'twig-code.json',
             expand: true,
-            cwd: 'templates/views/page',
+            cwd: 'src/views/page',
             src: ['**/*.twig', '!**/_*.twig', '!base.twig','!meta.twig'],
             dest: 'templates/page/',
             ext: '.tmpl'
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
           {
             data: 'twig-code.json',
             expand: true,
-            cwd: 'templates/views/cartridge/',
+            cwd: 'src/views/cartridge/',
             src: ['**/*.twig', '!**/_*.twig', '!macros.twig'],
             dest: 'templates/cartridge/',
             ext: '.tmpl'

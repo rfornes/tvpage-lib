@@ -3,10 +3,28 @@ body {
 	color: white;
 }
 
-.experience {
-	max-width: 
+.slick-arrow {
+	width: 40px;
+	height: 40px;
+	top: 40%;
 }
 
-.videos-gallery {
-	margin-top: 15px;
+.slick-arrow:before {
+	font-size: 45px;
+}
+
+.slick-prev {
+	left: -50px;
+}
+
+.slick-next {
+	right: -50px;
+}
+
+.modal-content {
+	max-width: 500px;
+}
+
+.modal-content .thumbnail {
+	max-width: 50px;
 }

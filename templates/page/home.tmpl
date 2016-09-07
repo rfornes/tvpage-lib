@@ -20,21 +20,34 @@
 <meta property="twitter:image" content="http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg">  
   	    <link rel="stylesheet" href="{{TVP_CDN_TVSITE}}/dist/tvpage-css.css">
   
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
 	<link rel="stylesheet" href="{{TVP_CDN_TVSITE}}/demo/theme.css">
   
   <body class="default">
     
-	{{ tvsite_cartridge_idstring("related-products") }}
+	{{ tvsite_cartridge_idstring("config") }}
 
-	{{ tvsite_cartridge_idstring("player") }}
 	
-	{{ tvsite_cartridge_idstring("videos-gallery") }}
+	{{ tvsite_cartridge_idstring("breadcrumbs") }}
+
+	
+	{{ tvsite_cartridge_idstring("channel-slider") }}
+
+	
+	{{ tvsite_cartridge_idstring("player") }}
+
+	
+	{{ tvsite_cartridge_idstring("video-slider") }}
+
+	
 
   </body>
   
   	  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   	<script src="//dev1.tvpage.com/tvsite/tvpage/tvpage-js"></script>
   
+	<script src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
 	<script src="{{TVP_CDN_TVSITE}}/demo/home.js"></script>
   
 </html>
