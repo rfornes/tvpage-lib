@@ -1,8 +1,6 @@
 # All stuff to build a site
 
-For a better understanding read [TVPage VCE](https://drive.google.com/a/tvpage.com/file/d/0B2Z67c0Imkm_MkgwRnByU19Gbk5TdEJEVE1tNUdBNHJ5Sk1z/view?usp=sharing)
-
-Use this repository to find (and add) boilerplates & assets to build either a Widget or a Page using cartridges.
+Use this repository to find (and add) boilerplates & assets to build either a Widget or a Page using cartridges (read [TVPage VCE](https://drive.google.com/a/tvpage.com/file/d/0B2Z67c0Imkm_MkgwRnByU19Gbk5TdEJEVE1tNUdBNHJ5Sk1z/view?usp=sharing))
 
 ## What's inside
 
