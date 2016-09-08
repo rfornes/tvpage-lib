@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="row">
+		<div class="column column-50">
+			<label for="search">Search by text</label>
+			<input type="text" placeholder="Search some" id="search">
+		</div>
+		{% for item in DATA.filters|split(',') %}
+			<div class="column">
+				<label for="{{item}}">Choose by {{item|replace({'video-':''})|replace({'-':' '})}}</label>
+				<select id="{{item}}" name="select">
+					{% for itemChildren in ['Option A', 'Option B','Option C','Option D'] %}
+						<option value="1">{{itemChildren}}</option>
+					{% endfor %}
+				</select>
+			</div>	
+		{% endfor %}
+	</div>
+</div>

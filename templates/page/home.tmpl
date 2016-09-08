@@ -1,31 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr"><title>{{siteTitle ~ " | " ~ pageTitle}}</title><link rel="canonical" href="http://{{domain}}/"/>
-  <title>Newegg TV</title>
-  <meta name="description" content="Providing computer parts and hardware, hard drives, cameras and software as well as electronics, tools, appliances, sporting goods, jewelry, watches, gaming, and much more.  With fast-shipping!  Once you know, you Newegg TV!">
-  <meta name="keywords" content="computer components, parts, LCD Monitors, Video Cards, Processors and CPUs, Memory, RAM, Digital Cameras, Printers, Notebook, Newegg, Tv, Newegg TV"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-  <meta name="google-site-verification" content="IFwv1Tz9t36ddNPl0qCBDbk-hMj2zPzV8sD5YCj99l8" />
-  <meta property="og:title" content="Newegg TV"/>
-  <meta property="og:url" content="http://www.newegg.tv" />
-  <meta property="og:type" content="website"/>
-  <meta property="og:description" content=""/>
-  <meta property="og:image" content="http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg"/>
-  <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Newegg TV"/>
-  <meta property="twitter:description" content=""/>
-  <meta property="twitter:url" content="http://www.newegg.tv"/>
-  <meta property="twitter:image" content="http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg"/>
-  <body>
-    {{tvsite_cartridge_idstring('header')}}
-    {{tvsite_cartridge_idstring('channels-slider')}}
-    {{tvsite_cartridge_idstring('channels-list')}}
-    <footer></footer>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="//dev1.tvpage.com/tvsite/tvpage/tvpage-js"></script>
-    <script>
-      if (window.tvpage) {
-      	console.log(tvpage);
-      }
-    </script>
+<html>
+  
+    	<title>{{siteTitle}}</title>
+    
+    	<link rel="canonical" href="http://{{domain}}/">
+    
+    	<meta name="description" content="">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+<meta name="google-site-verification" content="">
+<meta property="og:title" content="{{siteTitle}}">
+<meta property="og:url" content="{{domain}}">
+<meta property="og:type" content="website">
+<meta property="og:description" content="">
+<meta property="og:image" content="http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg">
+<meta property="twitter:card" content="summary">
+<meta property="twitter:title" content="{{siteTitle}}">
+<meta property="twitter:description" content="">
+<meta property="twitter:url" content="http://{{domain}}">
+<meta property="twitter:image" content="http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg">  
+  	    <link rel="stylesheet" href="{{TVP_CDN_TVSITE}}/dist/tvpage-css.css">
+  
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
+	<link rel="stylesheet" href="{{TVP_CDN_TVSITE}}/demo/theme.css">
+  
+  <body class="default">
+    
+	{{ tvsite_cartridge_idstring("config") }}
+
+	
+	{{ tvsite_cartridge_idstring("breadcrumbs") }}
+
+	
+	{{ tvsite_cartridge_idstring("channel-slider") }}
+
+	
+	{{ tvsite_cartridge_idstring("player") }}
+
+	
+	{{ tvsite_cartridge_idstring("video-slider") }}
+
+	
+
   </body>
+  
+  	  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="//dev1.tvpage.com/tvsite/tvpage/tvpage-js"></script>
+  
+	<script src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
+	<script src="{{TVP_CDN_TVSITE}}/demo/home.js"></script>
+  
 </html>

@@ -1,0 +1,7 @@
+{% if <%= items %>|length %}
+	<ul>
+		{% for item in <%=items%> %}
+			<li><%= itemTemplate %></li>
+		{% endfor %}
+	</ul>
+{% endif %}

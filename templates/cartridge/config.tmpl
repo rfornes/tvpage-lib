@@ -1,0 +1,23 @@
+
+
+
+	
+	
+		  
+	
+{% if ( loginId and domain ) %}
+
+
+<script>
+  TVSite = window.TVSite || {};
+  
+  	
+  		TVSite[ 'loginId' ] = {{loginId}};
+  	
+  		TVSite[ 'domain' ] = {{domain}};
+  	
+  
+</script>
+
+
+{% endif %}

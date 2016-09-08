@@ -7,7 +7,7 @@ requirejs.config({
   name: 'vendor/almond',
   optimize: 'none',
   exclude: ['jquery'],
-  include: ['src/tvpage'],
+  include: ['src/js/tvpage'],
   wrap: {
     start: "(function(root,factory) {\n"+   
            "  if (typeof define === 'function' && define.amd) {\n"+   
@@ -18,7 +18,7 @@ requirejs.config({
            "}(this,function($){\n",
 
     end:   "  define('jquery',function(){ return $; });\n"+
-           "  return require('src/tvpage');\n"+
+           "  return require('src/js/tvpage');\n"+
            "}));\n"
   },
   out: './dist/tvpage-js.tmpl'

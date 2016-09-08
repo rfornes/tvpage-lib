@@ -1,0 +1,19 @@
+{
+  "assetsUrl":"{{TVP_CDN_TVSITE}}",
+  "domain": "{{domain}}",
+  "home" : {
+  	"title": "{{siteTitle}}",
+  	"image": "http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg",
+  	"canonicalUrl": "http://{{domain}}/"
+  },
+  "playback" : {
+  	"title": "{{activeChannelData.video.title|trim|escape}}",
+  	"canonicalUrl": "http://{{domain}}/{{ activeChannelData.channel.titleTextEncoded|trim|replace({'_': '-'}) }}/{{ activeChannelData.video.titleTextEncoded|trim|replace({'_': '-'}) }}/{{activeChannelData.channel.id}}-{{activeChannelData.playlist.id}}-{{activeChannelData.video.id}}",
+  	"meta":"{{tvsite_meta_active_video()}}"
+  },
+  "channel" : {
+  	"title": "{{activeChannelData.channel.title|trim|escape}}",
+  	"canonicalUrl": "http://{{domain}}/c/{{ activeChannelData.channel.titleTextEncoded|trim|replace({'_': '-'}) }}/{{activeChannelData.channel.id}}--",
+  	"meta":"{{tvsite_meta_active_video()}}"
+  }
+}

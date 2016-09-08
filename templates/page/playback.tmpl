@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr"><title>{{activeChannelData.channel.title|trim|escape}}</title><link rel="canonical" href="http://{{domain}}/{{ activeChannelData.channel.titleTextEncoded|trim|replace({'_': '-'}) }}/{{ activeChannelData.video.titleTextEncoded|trim|replace({'_': '-'}) }}/{{activeChannelData.channel.id}}-{{activeChannelData.playlist.id}}-{{activeChannelData.video.id}}">{{tvsite_meta_active_video()}}
-  <body>{{tvsite_cartridge_idstring('header')}}
-    <p>Playback content here</p>
-    <footer></footer>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="//dev1.tvpage.com/tvsite/tvpage/tvpage-js"></script>
-    <script>
-      if (window.tvpage) {
-      	console.log(tvpage);
-      }
-    </script>
-  </body>
+<html>
+  
+  	<title>{{activeChannelData.video.title|trim|escape}}</title>
+  
+  	<link rel="canonical" href="http://{{domain}}/{{ activeChannelData.channel.titleTextEncoded|trim|replace({'_': '-'}) }}/{{ activeChannelData.video.titleTextEncoded|trim|replace({'_': '-'}) }}/{{activeChannelData.channel.id}}-{{activeChannelData.playlist.id}}-{{activeChannelData.video.id}}">
+  
+  	{{tvsite_meta_active_video()}}
+
+      <link rel="stylesheet" href="{{TVP_CDN_TVSITE}}/dist/tvpage-css.css">
+    
+  <body class="default">
+      </body>
+  
+  	  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="//dev1.tvpage.com/tvsite/tvpage/tvpage-js"></script>
+  
+	<script src=""></script>
+  
 </html>

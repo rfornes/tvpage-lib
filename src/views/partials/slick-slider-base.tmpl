@@ -1,0 +1,38 @@
+{% if <%= items %>|length %}
+	
+	<% if ( header !== 'undefined' && header ) { %>
+		<h1><%= header %></h1>
+	<% } %>
+
+	<div class="row slider">
+		<% var hasRows = rows !== 'undefined' && rows; %>
+		<% var raw = hasRows ? (items + '|batch(DATA.perRow is defined ? DATA.perRow : 4,"None")') : items; %>
+
+		{% for item in <%= raw %> %}
+			
+			<% if (hasRows) { %>
+				
+				{% for rowItem in item %}
+					{% if rowItem.id %}
+						<div id="item-{{rowItem.id}}" class="column <%= itemClass %>">
+							<%= itemTemplate %>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+			<% } else { %>
+				
+				{% if item.id %}
+					<div id="item-{{rowItem.id}}" class="column <%= itemClass %>">
+						<%= itemTemplate %>
+					</div>
+				{% endif %}
+
+			<% } %>
+
+		{% else %}
+			no items to display
+		{% endfor %}
+	</div>
+
+{% endif %}

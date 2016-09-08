@@ -1,0 +1,45 @@
+// Using both https://github.com/JohnAlbin/normalize-scss &&  https://milligram.github.io (very light)
+// as a base for our scss.
+@import "base";
+
+label {
+	text-transform: capitalize;
+}
+
+.gallery-grid {
+	.row {
+		margin-bottom: 1.35%;
+	}
+}
+
+.thumbnail {
+	display: block;
+	padding: 3px;
+	border: 1px solid white;
+}
+
+.pages-list {
+	text-align: center;
+	> li {
+		display: inline;
+	}
+}
+
+#player-cartridge {
+	background-color:black;
+	position: relative;
+	&:before{
+		display: block;
+		content: "";
+		width: 100%;
+		padding-top: 56.25%;
+	}	
+	.player-holder {
+		position: absolute !important;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+	}
+}
