@@ -32,7 +32,9 @@ $(function(){
         settings: {
           arrows: false,
           slidesToShow: 2,
-          slidesToScroll: 2
+          slidesToScroll: 2,
+          centerMode: true,
+          centerPadding: '60px',
         }
       },
       {
@@ -40,7 +42,9 @@ $(function(){
         settings: {
           arrows: false,
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '60px',
         }
       }
     ]

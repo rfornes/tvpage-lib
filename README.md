@@ -1,20 +1,13 @@
-# README Boilerplate
+# All stuff to build a site
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+Use this repository to find (and add) boilerplates & assets to build widgets using cartridges. 
 
-## Installation
+Following the idea on 
+[TVPage VCE](https://drive.google.com/a/tvpage.com/file/d/0B2Z67c0Imkm_MkgwRnByU19Gbk5TdEJEVE1tNUdBNHJ5Sk1z/view?usp=sharing)
 
-Lorem ipsum dolor Lorem ipsum dolor
+## What's inside
 
-```sh
-curl -LO http://git.io/Xy0Chg
-git add README.md
-git commit -m "Use README Boilerplate"
-```
-
-## Usage
-
-Lorem ipsum dolor Lorem ipsum dolor
+# Cartridge Templates:
 
 * Config
 * Search
@@ -36,4 +29,4 @@ Lorem ipsum dolor Lorem ipsum dolor
 
 ## Support
 
-Please [open an issue](https://github.com/fraction/readme-boilerplate/issues/new) for support.
+need a fix or a new feature? open a ticket [here](http://tvpage.atlassian.net)
