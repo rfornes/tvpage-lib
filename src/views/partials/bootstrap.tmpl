@@ -1,6 +1,6 @@
-<% var hasCheck = ('undefined' !== typeof bsChecks); %>
+<% var hasChecks = ('undefined' !== typeof bsChecks); %>
 
-<% if (hasCheck) { %>
+<% if (hasChecks) { %>
 	<% var check = ''; %>
 	<% for (var i = 0; i < bsChecks.length; i++) { %>
 		  <% check += bsChecks[i]; %>
@@ -12,11 +12,15 @@
   TVSite = window.TVSite || {};
   <% if ('object' === typeof bs) { %>
   	<% for ( var bsItem in bs ) { %>
-  		TVSite[ '<%= bsItem %>' ] = <%= bs[ bsItem ] %>;
+      <% if ( 'undefined' !== typeof asString && asString ) { %>
+        TVSite[ '<%= bsItem %>' ] = '<%= bs[ bsItem ] %>';
+      <% } else { %>
+        TVSite[ '<%= bsItem %>' ] = <%= bs[ bsItem ] %>;
+      <% } %>
   	<% } %>
   <% } %>
 </script>
 
-<% if (hasCheck) { %>
+<% if (hasChecks) { %>
 {% endif %}
 <% } %>

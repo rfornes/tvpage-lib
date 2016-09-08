@@ -19,6 +19,7 @@ var renderPartial = function(partial,obj){
     }
 
     if (obj.config) {
+      obj.asString = true;
       obj.bsChecks.push('loginId and domain');
       obj.bs = {
         loginId:'{{loginId}}',
