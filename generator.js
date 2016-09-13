@@ -1,48 +1,43 @@
 var _ = require('lodash');
 var fs = require('fs');
+var beautify = require('js-beautify').html;
 
 var isSet = function(opt){return ( !_.isUndefined(opt) && opt )};
 var entityType = null;
 
+var partialHelpers = {
+  renderCheck: function(data){
+    var code = '';
+    var trueCheck = function(ch){ return ch + ' is defined and ' + ch; };
+    _.each(data, function(dataCode,dataIndex) {
+      var checks = (dataCode.match(/\./g) || []).length ? dataCode.split('.') : [dataCode];
+      _.each(checks, function(check,i){
+        if (0 < i) {
+          code += ' and ' + trueCheck( checks[i - 1] + '.' + check );
+        } else {
+          code += (code !== '' ? ' and ' : '') + trueCheck( check );
+        }
+      });
+    });
+    return '{% if ('+code+') %}';
+  }
+};
 var renderPartial = function(partial,obj){
   if (!isSet( partial )) return console.log('nope');
 
-  if ('bootstrap' === partial) {
-    obj.bsChecks = [];
-    obj.bs = {};
-    
-    if (obj.playlist) {
-      obj.bsChecks.push('channel and channel.videos');
-      obj.bs = {
-        playList:'{{channel.videos|json_encode()}}'
-      };
-    }
-
-    if (obj.config) {
-      obj.asString = true;
-      obj.bsChecks.push('loginId and domain');
-      obj.bs = {
-        loginId:'{{loginId}}',
-        domain:'{{domain}}'
-      };
-    }
-
-  }
-
   var noWrap = obj && false === obj.wrap ? 1 : 0;
   var pTml = '';
-  
-  if ( !noWrap ) {
+
+  if ( !noWrap && partial !== 'bootstrap') {
     pTml += '<div class="'+partial+' container">';
   }
-  
   pTml += fs.readFileSync('src/views/partials/'+partial+'.tmpl').toString();
-  
-  if ( !noWrap ) {
+  if ( !noWrap && partial !== 'bootstrap') {
     pTml += '</div/>';
   }
 
-  return _.template( pTml )( obj );
+  var html = ( _.template( pTml )( _.extend(obj, partialHelpers) ) ).trim();
+  return html;
 };
 
 var renderItemTemplate = function(required){
@@ -97,8 +92,9 @@ var getItems = function(ent){
   return itemsCode;
 };
 
+// Generates the cartridge content, with checks, settings ready, etc.
 var Generator = {
-  generate: function(name, opts){
+  generate: function(name, opts, isWidget){
 
     if (entityType) entityType = null;
     entityType = opts && opts.entity ? opts.entity : '';
@@ -108,103 +104,130 @@ var Generator = {
     name = name || '';
     name = name.trim();
     var isConfig = 'config' === name;
-
-    var widget = '';
-    if (!isConfig) {
-      widget += '<section id="'+name+'-cartridge">';
-    }
     
+    var generated = '';
     if ('config' === name) {
-      widget += renderPartial('bootstrap',{
-        wrap: false,
-        config: true
+      generated += renderPartial('bootstrap',{
+        data: {
+          lid: 'loginId',
+          domain: 'domain'
+        },
+        asString: true
       });
     }
 
-    if ('breadcrumbs' === name) {
-      widget += renderPartial('breadcrumbs',{
+    if (!isConfig) {
+      generated += '<section id="'+name+'-cartridge">';
+    }
+
+    if ('breadcrumb' === name) {
+      generated += renderPartial('breadcrumb',{
         separator: opts && opts.separator ? opts.separator.trim() : ''
       });
     }
 
-    if ('player' === component) {
-
-      widget += '<div id="player-holder" class="player-holder"></div>';
-
-    } else if ('gallery' === component) {
-      var playback = isSet( opts.playback );
-      
-      if ( isSet( opts.searchBar ) ) {
-        widget += renderPartial('search-bar', 'gallery');
-      }
-      
-      widget += renderPartial('grid',{
-        items: getItems( entityType ),
-        itemTemplate: renderItemTemplate(opts.itemTemplate),
-        itemClass: playback && 'video-play'
+    if ('player' === name) {
+      generated += renderPartial('div', {
+        wrap: false,
+        id: 'player-holder',
+        className: 'player-holder'
       });
+    }
 
-      if ( isSet( opts.pagination ) ) {
-        widget += renderPartial('pagination', { pages: 5 });
-      }
+    if ('video-grid' === name || 'channel-grid' === name) {
+      generated += renderPartial('grid', function(){
+        var data = {};
+        
+        data.items = '';
+        if ('undefined' !== typeof entityType) {
+          data.items = getItems( entityType );
+        }
 
-      if ( playback ) {
-        widget += renderPartial('bootstrap',{
-          playlist: true
+        data.item = '';
+        if (opts && opts.item && '' !== opts.item) {
+          data.item = renderItemTemplate(opts.item);
+        }
+
+        data.itemClass = '';
+        if ( isSet(opts.itemClass) ) {
+          data.itemClass = opts.itemClass;
+        }
+
+        data.header = '';
+        if (opts && opts.header && '' !== opts.header) {
+          data.header += opts.header;
+        }
+
+        return data;
+      }());
+    }
+
+    // if ('list' === component) {
+    //   generated += renderPartial('list',{
+    //     items: getItems( entityType ),
+    //     itemTemplate: renderItemTemplate(opts.itemTemplate)
+    //   });
+    // } 
+
+    if ('video-slider' === name || 'channel-slider' === name) {
+      generated += renderPartial('slick-slider-base', function(){
+        var data = {};
+        
+        data.items = '';
+        if ('undefined' !== typeof entityType) {
+          data.items = getItems( entityType );
+        }
+
+        data.itemClass = '';
+        if ( isSet(opts.itemClass) ) {
+          data.itemClass = opts.itemClass;
+        }
+
+        data.rows = null;
+        if ('channel' === entityType) {
+          data.rows = false;
+        }
+
+        data.item = '';
+        if (opts && opts.item && '' !== opts.item) {
+          data.item = renderItemTemplate(opts.item);
+        }
+
+        data.header = '';
+        if (opts && opts.header && '' !== opts.header) {
+          data.header += opts.header;
+        }
+
+        return data;
+      }());
+
+      if ( isSet( opts.renderData ) ) {
+        generated += renderPartial('bootstrap',{
+          data: {
+            playList: 'channel.videos'
+          }
         });
       }
-
-    } else if ('list' === component) {
-
-      widget += renderPartial('list',{
-        items: getItems( entityType ),
-        itemTemplate: renderItemTemplate(opts.itemTemplate)
-      });
-
-    } else if ('slider' === component) {
-      var playback = isSet( opts.playback );
-      
-      var data = {
-        items: getItems( entityType ),
-        itemClass: playback ? 'video-play' : ''
-      };
-
-      data.rows = null;
-      if ('channel' === entityType) {
-        data.rows = false;
-      }
-
-      data.itemTemplate = '';
-      if (opts && opts.itemTemplate && '' !== opts.itemTemplate) {
-        data.itemTemplate = renderItemTemplate(opts.itemTemplate);
-      }
-
-      data.header = '';
-      if (opts && opts.header && '' !== opts.header) {
-        data.header += opts.header;
-      }
-
-      widget += renderPartial('slick-slider-base', data);
-
-      if ( playback ) {
-        widget += renderPartial('bootstrap',{
-          playlist: true
-        });
-      }
-
-    } else {
-
     }
 
     if (!isConfig) {
-      widget += '</section>';
+      generated += '</section>';
     }
 
     if (name !== '') {
-      writeFile(name, widget);
+      writeFile(name, generated);
     }
 
-    return '{{ tvsite_cartridge_idstring("'+name+'") }}';
+    var ret = '';
+    if (isWidget) {
+      ret = renderPartial('widget-code',{
+        wrap: false
+      });
+    } else {
+      ret = '{{ tvsite_cartridge_idstring("'+name+'") }}';
+    }
+
+    return ret;
   }
 };
 

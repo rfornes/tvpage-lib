@@ -16,9 +16,17 @@
   <meta property="twitter:url" content="http://{{domain}}" />
   <meta property="twitter:image" content="http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg" />
   <link rel="stylesheet" href="{{TVP_CDN_TVSITE}}/dist/tvpage-css.css">
-  <link rel="stylesheet" href="{{TVP_CDN_TVSITE}}/demo/theme.css">
-  <body class="default"> {{ tvsite_cartridge_idstring("config") }} {{ tvsite_cartridge_idstring("player") }} {{ tvsite_cartridge_idstring("breadcrumb") }} {{ tvsite_cartridge_idstring("channel-slider") }} {{ tvsite_cartridge_idstring("channel-grid") }} {{ tvsite_cartridge_idstring("video-grid")
-    }} {{ tvsite_cartridge_idstring("video-slider") }} </body>
+  <body class="default">
+    <!-- TVPAGE START -->
+    <script>
+      (function(r, d, p) {
+        var s = d.createElement('script');
+        s.src = (p === 'https:' ? 'https:' : 'http:') + '//app.tvpage.com/tvsite/embed.bandh.com/embed-1';
+        d.write(s.outerHTML ? s.outerHTML : new XMLSerializer().serializeToString(s));
+      })(window, document, document.location.protocol);
+    </script>
+    <!-- TVPAGE END -->
+  </body>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="//dev1.tvpage.com/tvsite/tvpage/tvpage-js"></script>
 </html>

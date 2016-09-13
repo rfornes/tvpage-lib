@@ -12,7 +12,7 @@
 <% } %>
 
 {% if ( '' != <%= src %> and '' != <%= link %> ) %}
-	<a href="<%= link %>" class="thumbnail">
+	<a href="{{<%= link %>}}" class="thumbnail">
 		<img src="{{ <%= src %> }}" alt="{{item.title}}">
 	</a>
 {% endif %}

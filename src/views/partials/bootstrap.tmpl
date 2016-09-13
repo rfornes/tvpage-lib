@@ -1,26 +1,20 @@
-<% var hasChecks = ('undefined' !== typeof bsChecks); %>
+<% if ('undefined' !== typeof data) { %>
 
-<% if (hasChecks) { %>
-	<% var check = ''; %>
-	<% for (var i = 0; i < bsChecks.length; i++) { %>
-		  <% check += bsChecks[i]; %>
-	<% } %>
-{% if ( <%= check %> ) %}
-<% } %>
+  <%= renderCheck(data) %>
 
-<script>
-  TVSite = window.TVSite || {};
-  <% if ('object' === typeof bs) { %>
-  	<% for ( var bsItem in bs ) { %>
+  <script>
+    TVSite = window.TVSite || {};
+    <% _.each(data, function(dataCode,dataIndex) { %>
       <% if ( 'undefined' !== typeof asString && asString ) { %>
-        TVSite[ '<%= bsItem %>' ] = '<%= bs[ bsItem ] %>';
+        /* beautify ignore:start */
+        TVSite[ '<%= dataIndex %>' ] = '{{<%= dataCode %>}}';
+        /* beautify ignore:end */
       <% } else { %>
-        TVSite[ '<%= bsItem %>' ] = <%= bs[ bsItem ] %>;
+        /* beautify ignore:start */
+        TVSite[ '<%= dataIndex %>' ] = {{<%= dataCode %>|json_encode()}};
+        /* beautify ignore:end */
       <% } %>
-  	<% } %>
-  <% } %>
-</script>
-
-<% if (hasChecks) { %>
+    <% }); %>
+  </script>
 {% endif %}
 <% } %>

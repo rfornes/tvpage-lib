@@ -15,12 +15,12 @@ Use this repository to find (and add) boilerplates & assets to build either a Wi
 * Channel Slider
 * Channel Grid
 * Channel List
-* Video Slider ( 90% )
-* Video Grid ( 90% )
-* Video List ( 70% )
-* In*Time Product CTA
-* Related Product CTA ( 70% )
-* Player ( 70% )
+* Video Slider
+* Video Grid
+* Video List
+* In-Time Product
+* Related Product
+* Player
 * Transcript
 * Video Gallery
 

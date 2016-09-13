@@ -1,59 +1,53 @@
 {% extends 'base.twig' %}
-
 {% block css %}
 	{{ parent() }}
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
+	{#<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">#}
 	<link rel="stylesheet" href="{{assetsUrl}}/demo/theme.css">
 {% endblock %}
-
 {% block main %}
-
+	
 	{{ cartridge( 'config') }}
+	
+	{{ cartridge( 'player') }}
 
-	{# Search #}
-	{{ 
-		cartridge( 'search', {})
-	}}
+	{{ cartridge( 'breadcrumb', { separator: '//' }) }}
 
-	{# Breadcrumbs #}
-	{{ 
-		cartridge( 'breadcrumbs', {
-			separator: '//'
-		})
-	}}
-
-	{# Channel Slider #}
 	{{
 		cartridge( 'channel-slider', {
 			entity: 'channel',
-			component: 'slider',
-			header: 'Watch Channels',
-			itemTemplate: ['thumbnail', 'title']
+			header: 'Channels Slider',
+			item: ['thumbnail','title']
 		})
 	}}
 
-	{# Player #}
 	{{
-		cartridge( 'player', {
-			component: 'player'
+		cartridge( 'channel-grid', {
+			entity: 'channel',
+			header: 'Channels Grid',
+			item: ['thumbnail','title']
 		})
 	}}
 
-	{# Video Slider #}
+	{{
+		cartridge( 'video-grid', {
+			entity: 'video',
+			header: 'Video Grid',
+			item: ['thumbnail','title']
+		})
+	}}
+
 	{{
 		cartridge( 'video-slider', {
 			entity: 'video',
-			component: 'slider',
-			header: 'Watch Videos',
-			itemTemplate: ['thumbnail','title'],
-			actions: 'play',
-			playback: true
+			header: 'Videos Slider',
+			item: ['thumbnail','title'],
+			itemClass: 'play',
+			renderData: true
 		})
 	}}
 
-	{# Video Gallery #}
-	{{
+	{#{{
 		cartridge( 'videos-gallery', {
 			entity: 'video',
 			component: 'gallery',
@@ -64,10 +58,19 @@
 		})
 	}}
 
+	{{
+		widget( 'video-slider', {
+			entity: 'video',
+			header: 'Watch Videos',
+			item: ['thumbnail','title'],
+			itemClass: 'play',
+			renderData: true
+		})
+	}}#}
+	
 {% endblock %}
-
 {% block javascripts %}
 	{{ parent() }}
-	<script src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
-	<script src="{{assetsUrl}}/demo/home.js"></script>
+	{#<script src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
+	<script src="{{assetsUrl}}/demo/home.js"></script>#}
 {% endblock %}

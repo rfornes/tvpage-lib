@@ -589,14 +589,14 @@ define('src/js/player',['require','jquery'],function(require){
 				var found;
 				for (var i = 0; i < playList.length; i++) {
 					var video = playList[i];
-					if (+video.id === toPlay) {
+					if (+video.id === Number(toPlay)) {
 						found = video;
 					}
 				}
 				if (found) {
 					play(found);
 				} else {
-					console.log('id not found');
+					console.log('id not found', toPlay);
 				}
 			}
 		}
@@ -610,13 +610,15 @@ define('src/js/load',['require','jquery'],function(require){
   	var $ = require('jquery');
 
   	function load(endpoint,opts,cback){
+      
       if (!$ || !$.ajax || !$.isFunction(cback)) return false;
+      
       $.ajax({
     		url: endpoint,
     		type: 'post',
     		dataType: 'json',
     		data: JSON.stringify({
-    			'X-login-id': TVSite.config.loginId,
+    			'X-login-id': TVSite.lid,
     			videoId: opts.id || 0,
     			includeData: 'undefined' !== opts.data ? opts.data : false,
     			includeJS:0,
@@ -624,11 +626,13 @@ define('src/js/load',['require','jquery'],function(require){
     			wrap:0
     		})
     	}).done(function(res){
-    		if (!res || !res.html || !res.html.trim()) {
+    		
+        if (!res || !res.html || !res.html.trim()) {
           cback(true,res);
         } else {
           cback(null,res.html.trim());
         }
+        
     	});
     }
 
@@ -665,8 +669,8 @@ define('src/js/search',['require','jquery'],function(require){
     delete settings.request;
     setts = $.extend(setts, settings);
     
-    if (window.TVSite && TVSite.config && TVSite.config.loginId) {
-      ajaxParams['X-login-id'] = TVSite.config.loginId;
+    if (window.TVSite && TVSite.lid) {
+      ajaxParams['X-login-id'] = TVSite.lid;
     }
 
     $el = $(selector);

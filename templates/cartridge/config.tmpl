@@ -1,27 +1,10 @@
-
-
-
-	
-	
-		  
-	
-{% if ( loginId and domain ) %}
-
-
+{% if (loginId is defined and loginId and domain is defined and domain) %}
 <script>
   TVSite = window.TVSite || {};
-  
-  	
-      
-        TVSite[ 'loginId' ] = '{{loginId}}';
-      
-  	
-      
+  /* beautify ignore:start */
+        TVSite[ 'lid' ] = '{{loginId}}';
+        /* beautify ignore:end */
+  /* beautify ignore:start */
         TVSite[ 'domain' ] = '{{domain}}';
-      
-  	
-  
-</script>
-
-
-{% endif %}
+        /* beautify ignore:end */
+</script> {% endif %}

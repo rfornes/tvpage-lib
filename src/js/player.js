@@ -71,14 +71,14 @@ define(function(require){
 				var found;
 				for (var i = 0; i < playList.length; i++) {
 					var video = playList[i];
-					if (+video.id === toPlay) {
+					if (+video.id === Number(toPlay)) {
 						found = video;
 					}
 				}
 				if (found) {
 					play(found);
 				} else {
-					console.log('id not found');
+					console.log('id not found', toPlay);
 				}
 			}
 		}

@@ -28,8 +28,8 @@ define(function(require){
     delete settings.request;
     setts = $.extend(setts, settings);
     
-    if (window.TVSite && TVSite.config && TVSite.config.loginId) {
-      ajaxParams['X-login-id'] = TVSite.config.loginId;
+    if (window.TVSite && TVSite.lid) {
+      ajaxParams['X-login-id'] = TVSite.lid;
     }
 
     $el = $(selector);

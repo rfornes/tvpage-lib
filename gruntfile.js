@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     watch : {
       templates : {
         files : ['gruntfile.js','src/views/**/*.twig'],
-        tasks : ['twigRender']
+        tasks : ['twigRender', 'jsbeautifier']
       },
       'lib-js' : {
         files : ['src/js/**/*.js'],
@@ -71,7 +71,10 @@ module.exports = function(grunt) {
             Twig.exports.extendFunction('cartridge',function(name,options){
               return Generator.generate(name,options);
             });
-          }
+            Twig.exports.extendFunction('widget',function(name,options){
+              return Generator.generate(name,options,true);
+            });
+          },
         ]
       },
       pages: {
@@ -85,31 +88,19 @@ module.exports = function(grunt) {
             ext: '.tmpl'
           }
         ]
-      },
-      cartridges: {
-        files : [
-          {
-            data: 'twig-code.json',
-            expand: true,
-            cwd: 'src/views/cartridge/',
-            src: ['**/*.twig', '!**/_*.twig', '!macros.twig'],
-            dest: 'templates/cartridge/',
-            ext: '.tmpl'
-          }
-        ]
       }
     },
-    htmlmin: {
-      templates: {
-        options: { 
-          removeComments: false,
-          //conservativeCollapse: true,
-          //collapseWhitespace: true,
-        },
-        files: {
-          'templates/page/channel.tmpl': 'templates/page/channel.tmpl',
-          'templates/page/home.tmpl': 'templates/page/home.tmpl',
-          'templates/page/playback.tmpl': 'templates/page/playback.tmpl' 
+    jsbeautifier: {
+      files: ["templates/**/*.tmpl", "!templates/page/tvpage-js.tmpl"],
+      options: {
+        html: {
+          indentChar: " ",
+          indentSize: 2,
+          preserveNewlines: false,
+          noPreserveNewlines: true,
+          indentInnerHtml: true,
+          wrapAttributes: 'force-aligned',
+          extraLiners: ['script','section']
         }
       }
     }
@@ -122,10 +113,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-twig-render');
-  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-jsbeautifier');
 
   grunt.registerTask('lib-js',['clean:lib-js','requirejs','copy','watch:lib-js']);
   grunt.registerTask('lib-css',['clean:lib-css','sass','autoprefixer','watch:lib-css']);
-  grunt.registerTask('lib-templates',['clean:templates','twigRender', 'htmlmin', 'watch:templates']);
+  grunt.registerTask('lib-templates',['clean:templates','twigRender','jsbeautifier','watch:templates']);
 
 };

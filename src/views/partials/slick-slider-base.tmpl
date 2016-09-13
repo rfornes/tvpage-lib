@@ -15,7 +15,7 @@
 				{% for rowItem in item %}
 					{% if rowItem.id %}
 						<div id="item-{{rowItem.id}}" class="column <%= itemClass %>">
-							<%= itemTemplate %>
+							<%= item %>
 						</div>
 					{% endif %}
 				{% endfor %}
@@ -23,8 +23,8 @@
 			<% } else { %>
 				
 				{% if item.id %}
-					<div id="item-{{rowItem.id}}" class="column <%= itemClass %>">
-						<%= itemTemplate %>
+					<div id="item-{{item.id}}" class="column <%= itemClass %>">
+						<%= item %>
 					</div>
 				{% endif %}
 

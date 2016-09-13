@@ -1,0 +1,11 @@
+<section id="video-grid-cartridge">
+  <div class="grid container">{% if channel.videos|length %}
+    <h1>Video Grid</h1>
+    <div class="container"> {% for row in channel.videos|batch( DATA.perRow is defined ? DATA.perRow : 4, "None") %}
+      <div class="row"> {% for item in row %} {% if item.id %}
+        <div class="column " data-video-id={{item.id}}> {% if ( '' != item.asset.thumbnailUrl and '' != tvsite_canonical_url(channel, channel.playlist, item) ) %}
+          <a href="{{tvsite_canonical_url(channel, channel.playlist, item)}}" class="thumbnail"> <img src="{{ item.asset.thumbnailUrl }}" alt="{{item.title}}"> </a> {% endif %}
+          <p>{{item.title|slice(0, DATA.titleLength is defined ? DATA.titleLength : 40)}}</p>
+        </div> {% endif %} {% endfor %} </div> {% else %} no videos {% endfor %} </div> {% endif %}
+    </div/>
+</section>
