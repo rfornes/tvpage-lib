@@ -1,6 +1,6 @@
 $(function(){
 
-  var player = new tvpage.player('#player-holder',{
+  var player = new tvpage.player('#player',{
     playList: TVSite.playList
   });
 
@@ -13,19 +13,17 @@ $(function(){
 
   var sliderSettings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 300,
     slidesToShow: 4,
     slidesToScroll: 4,
-    centerMode: true,
-    centerPadding: '60px',
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           arrows: false,
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           infinite: true,
           dots: true,
           centerMode: true,
@@ -36,26 +34,16 @@ $(function(){
         breakpoint: 600,
         settings: {
           arrows: false,
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          centerMode: true,
-          centerPadding: '60px',
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          arrows: false,
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: true,
           centerPadding: '60px',
         }
       }
-    ]    
+    ]
   };
 
-  $('#video-slider-cartridge').find('.slider').slick(sliderSettings);
-  $('#channel-slider-cartridge').find('.slider').slick(sliderSettings);
+  $('#video-slider-cartridge').find('.row').slick(sliderSettings);
+  $('#channel-slider-cartridge').find('.row').slick(sliderSettings);
 
 });

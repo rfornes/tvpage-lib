@@ -1,9 +1,9 @@
-{% if <%= items %>|length %}
+{% if <%= collCode %>|length %}
 	<% if ( header !== 'undefined' && header ) { %>
 		<h1><%= header %></h1>
 	<% } %>
 	<div class="container">
-		{% for row in <%= items %>|batch( DATA.perRow is defined ? DATA.perRow : 4, "None") %}
+		{% for row in <%= collCode %>|batch( DATA.perRow is defined ? DATA.perRow : 4, "None") %}
 			<div class="row">
 				{% for item in row %}
 					{% if item.id %}

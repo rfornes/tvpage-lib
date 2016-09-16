@@ -2,6 +2,25 @@
 // as a base for our scss.
 @import "base";
 
+#player-cartridge {
+	background-color:black;
+	position: relative;
+	&:before{
+		display: block;
+		content: "";
+		width: 100%;
+		padding-top: 56.25%;
+	}	
+	.player {
+		position: absolute !important;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+	}
+}
+
 label {
 	text-transform: capitalize;
 }
@@ -22,24 +41,5 @@ label {
 	text-align: center;
 	> li {
 		display: inline;
-	}
-}
-
-#player-cartridge {
-	background-color:black;
-	position: relative;
-	&:before{
-		display: block;
-		content: "";
-		width: 100%;
-		padding-top: 56.25%;
-	}	
-	.player-holder {
-		position: absolute !important;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		margin: auto;
 	}
 }

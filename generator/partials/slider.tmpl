@@ -1,12 +1,11 @@
-{% if <%= items %>|length %}
-	
-	<% if ( header !== 'undefined' && header ) { %>
-		<h1><%= header %></h1>
-	<% } %>
+<% if ( header !== 'undefined' && header ) { %>
+	<h1><%= header %></h1>
+<% } %>
 
-	<div class="row slider">
+{% if <%= collCode %>|length %}
+	<div class="row">
 		<% var hasRows = rows !== 'undefined' && rows; %>
-		<% var raw = hasRows ? (items + '|batch(DATA.perRow is defined ? DATA.perRow : 4,"None")') : items; %>
+		<% var raw = hasRows ? (collCode + '|batch(DATA.perRow is defined ? DATA.perRow : 4,"None")') : collCode; %>
 
 		{% for item in <%= raw %> %}
 			

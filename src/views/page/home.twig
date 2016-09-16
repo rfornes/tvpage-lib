@@ -1,8 +1,8 @@
 {% extends 'base.twig' %}
 {% block css %}
 	{{ parent() }}
-	{#<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">#}
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
 	<link rel="stylesheet" href="{{assetsUrl}}/demo/theme.css">
 {% endblock %}
 {% block main %}
@@ -21,13 +21,13 @@
 		})
 	}}
 
-	{{
+	{#{{
 		cartridge( 'channel-grid', {
 			entity: 'channel',
 			header: 'Channels Grid',
 			item: ['thumbnail','title']
 		})
-	}}
+	}}#}
 
 	{{
 		cartridge( 'video-grid', {
@@ -46,31 +46,10 @@
 			renderData: true
 		})
 	}}
-
-	{#{{
-		cartridge( 'videos-gallery', {
-			entity: 'video',
-			component: 'gallery',
-			playback: true,
-			searchBar: true,
-			pagination: true,
-			itemTemplate: ['thumbnail','title']
-		})
-	}}
-
-	{{
-		widget( 'video-slider', {
-			entity: 'video',
-			header: 'Watch Videos',
-			item: ['thumbnail','title'],
-			itemClass: 'play',
-			renderData: true
-		})
-	}}#}
 	
 {% endblock %}
 {% block javascripts %}
 	{{ parent() }}
-	{#<script src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
-	<script src="{{assetsUrl}}/demo/home.js"></script>#}
+	<script src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
+	<script src="{{assetsUrl}}/demo/home.js"></script>
 {% endblock %}
