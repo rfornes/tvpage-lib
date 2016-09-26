@@ -15,14 +15,16 @@
   <meta property="twitter:description" content="" />
   <meta property="twitter:url" content="http://{{domain}}" />
   <meta property="twitter:image" content="http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg" />
-  <link rel="stylesheet" href="{{TVP_CDN_TVSITE}}/dist/tvpage-css.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{TVP_CDN_TVSITE}}/demo/theme.css">
-  <body class="default"> {{ tvsite_cartridge_idstring("config") }} {{ tvsite_cartridge_idstring("player") }} {{ tvsite_cartridge_idstring("breadcrumb") }} {{ tvsite_cartridge_idstring("channel-slider") }} {{ tvsite_cartridge_idstring("video-grid") }} {{ tvsite_cartridge_idstring("video-slider")
-    }} </body>
+  <body class="default">
+    <div class="container">
+      <div class="row">
+        <!-- header nav -->{{ tvsite_cartridge_idstring("header-navigation-1") }} </div>
+    </div>
+  </body>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="//dev1.tvpage.com/tvsite/tvpage/tvpage-js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
   <script src="{{TVP_CDN_TVSITE}}/demo/home.js"></script>
 </html>

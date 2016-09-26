@@ -15,18 +15,21 @@
   <meta property="twitter:description" content="" />
   <meta property="twitter:url" content="http://{{domain}}" />
   <meta property="twitter:image" content="http:{{TVP_CDN_TVSITE}}/src/img/landing.jpg" />
-  <link rel="stylesheet" href="{{TVP_CDN_TVSITE}}/dist/tvpage-css.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <body class="default">
-    <!-- TVPAGE START -->
-    <script>
-      (function(r, d, p) {
-        var s = d.createElement('script');
-        s.src = (p === 'https:' ? 'https:' : 'http:') + '//app.tvpage.com/tvsite/embed.bandh.com/embed-1';
-        d.write(s.outerHTML ? s.outerHTML : new XMLSerializer().serializeToString(s));
-      })(window, document, document.location.protocol);
-    </script>
-    <!-- TVPAGE END -->
+    <div class="container">
+      <!-- TVPAGE START -->
+      <script>
+        (function(r, d, p) {
+          var s = d.createElement('script');
+          s.src = (p === 'https:' ? 'https:' : 'http:') + '//app.tvpage.com/tvsite/embed.bandh.com/embed-1';
+          d.write(s.outerHTML ? s.outerHTML : new XMLSerializer().serializeToString(s));
+        })(window, document, document.location.protocol);
+      </script>
+      <!-- TVPAGE END -->
+    </div>
   </body>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="//dev1.tvpage.com/tvsite/tvpage/tvpage-js"></script>
 </html>

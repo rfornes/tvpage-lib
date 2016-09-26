@@ -3,7 +3,18 @@ var renderer = require(__dirname + '/../renderer');
 module.exports = function(entityType,options){
 
   var context = {};
-  
+
+  context.itemClass = '';
+  if ( 'undefined' !== options.itemClass && options.itemClass) {
+    context.itemClass = options.itemClass;
+  }
+
+  context.header = '';
+  if (options && options.header && '' !== options.header) {
+    context.header += options.header;
+  }
+
+  // Collection code
   context.collCode = '';
   if (entityType === 'video') {
     context.collCode = 'channel.videos';
@@ -15,19 +26,10 @@ module.exports = function(entityType,options){
     context.collCode = 'LIST';
   }
 
+  // Item Interpolation
   context.item = '';
   if (options && options.item && '' !== options.item) {
     context.item = renderer.renderItemTemplate(options.item, entityType);
-  }
-
-  context.itemClass = '';
-  if ( 'undefined' !== options.itemClass && options.itemClass) {
-    context.itemClass = options.itemClass;
-  }
-
-  context.header = '';
-  if (options && options.header && '' !== options.header) {
-    context.header += options.header;
   }
 
   return context;

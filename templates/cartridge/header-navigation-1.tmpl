@@ -1,0 +1,5 @@
+ {% if (LIST is defined and LIST) %}
+<ul class="dropdown"> {% for item in LIST %}{% if (item is defined and item and item.channelId is defined and item.channelId) %} {% endif %} {% endfor %} </ul> {% endif %} {% if (LIST is defined and LIST) %}
+<ul class="nav navbar-nav"> {% for item in LIST %}{% if (item is defined and item) %} {% if (item == "DROPDOWN") %}
+  <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown<span class="caret"></span></a> {{ tvsite_cartridge_idstring( item.linkTitle ) }} </li> {% else %}
+  <li><a href="{{item.link}}">{{item.linkTitle}}</a></li> {% endif %} {% endif %} {% endfor %} </ul> {% endif %}

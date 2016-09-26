@@ -1,0 +1,4 @@
+<% if ('undefined' === typeof listCode) return '<small>nope</small>'; %>
+{% if <%= listCode %>|length %}
+<%= renderList( listCode ) %>
+{% endif %}

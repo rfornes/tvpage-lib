@@ -26,23 +26,23 @@ define(function(require){
 	var renderPartial = function(partial,obj){
 	  if (!isSet( partial )) return console.log('nope');
 
-	  var noWrap = obj && false === obj.wrap ? 1 : 0;
+	  var noWrap = obj && true === obj.wrap ? 1 : 0;
 	  var pTml = '';
 
-	  if ( !noWrap && partial !== 'bootstrap') {
+	  if ( !noWrap && partial !== "bootstrap") {
 	    pTml += '<div class="'+partial+pTml+' container" ';
-	    if (partial === 'player') {
+	    if (partial === "player") {
 	      pTml += 'id="player"'
 	    }
 	    pTml += '>';
 	  }
 	  
-	  if (partial !== 'player') {
+	  if (partial !== "player") {
 	    pTml += fs.readFileSync('src/views/partials/'+partial+'.tmpl').toString();  
 	  }
 	  
-	  if ( !noWrap && partial !== 'bootstrap') {
-	    pTml += '</div/>';
+	  if ( !noWrap && partial !== "bootstrap") {
+	    pTml += "</div/>";
 	  }
 
 	  var html = ( _.template( pTml )( _.extend(obj, partialHelpers) ) ).trim();

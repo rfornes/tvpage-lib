@@ -1,79 +1,90 @@
-var _ = require('lodash');
-var fs = require('fs');
-var renderer = require(__dirname + '/renderer');
-var genName = 'cartridge';
-var extName = 'tvsite_cartridge_idstring';
+var fs = require("fs");
+var renderer = require(__dirname + "/renderer.js");
+var extName = "tvsite_cartridge_idstring";
+var genName = "cartridge";
+var targetPath = "templates/"+genName;
+var componentsPath = __dirname + "/components/";
+var isDefined = function(val){ return "undefined" !== typeof val };
+var isObject = function(val){ return "object" !== typeof val };
+var getBefore = function(tag, id, classses){
+	var ret = "<"+tag+" id=\""+id+"\"";
+  	ret += " class=\""+(classses || "")+"\">";
+	return ret;
+};
+var getAfter = function(tag){ return "</"+tag+">"; };
 
 var Generator = {
-  generate: function(name, opts){
+  generate: function(reqName, options){
+  	var backlog = { };
+ 	var childs = isDefined( options ) && isDefined( options.childs ) ? options.childs : {};
+    for (var prop in childs) {
+		backlog[ prop ] = childs[ prop ];
+	}
+    backlog[ reqName || '' ] = options || {};
 
-    var entityType = null;
-    if ('undefined' !== typeof opts && opts.entity) {
-      entityType =  opts.entity;
-    }
-    
-    name = name || '';
-    name = name.trim();
-    
-    var generated = '';
-    if ('config' === name) {
-      generated += renderer.renderPartial('bootstrap',{
-        asString: true,
-        wrap: false,
-        data: {
-          lid: 'loginId',
-          domain: 'domain'
-        }
-      });
-    }
+    var generated = "";
+    delete backlog._keys;
+    for ( var name in backlog ) {
+		
+    	name = (name || "").trim();
+    	var opts = backlog[name];
+	    
+	    var wrap = false;
+	    if ( isDefined(opts.wrap) && opts.wrap ) {
+	    	wrap = true;
+	    }
 
-    var isConfig = 'config' === name;
-    if (!isConfig) {
-      generated += '<section id="'+name+'-'+genName+'">';
-    }
+	    if (wrap) {
+	    	var classes = "";
+	    	if ( isDefined(opts.className) ) {
+	    		classes += opts.className;
+	    	}
 
-    if ('breadcrumb' === name) {
-      generated += renderer.renderPartial('breadcrumb',{
-        separator: opts && opts.separator ? opts.separator.trim() : ''
-      });
-    }
+	    	var tag = "div";
+	    	if ( isDefined(opts.tagType) ) {
+	    		tag = opts.tagType;
+	    	}
 
-    if ('player' === name) {
-      generated += renderer.div(name,name);;
-    }
+	    	generated += getBefore( tag, genName+"-"+name, classes );
+	    }
+	    
+	    // Set the component
+	    var component = null;
+	    if ( isDefined( opts.component ) ) {
+	      component = opts.component;
+	    }
 
-    if ('video-grid' === name || 'channel-grid' === name) {
-      var gridContext = require(__dirname + '/contexts/grid.js')(entityType,opts);
-      generated += renderer.renderPartial('grid', gridContext);
-    }
+	    var content = "";
+	    if ( component ) {
+	      content = renderer.renderComponent( component, function(){
+	      	var entity;
+			if ( isDefined( opts.entity ) ) {
+				entity = opts.entity;
+			}
+			return entity;
+	      }( ), opts );
+	    } else {
+	      content = ( opts.content || "" );
+	    }
+		
+		generated += content;
+		if (wrap) {
+			//generated += getAfter( "div" );
+		}
+	    
+	    var extensionName = '';
+	    if ( '' !== name && '' !== generated ) {
+	      fs.writeFile( ('templates/'+genName+'/'+name+'.tmpl') || '', generated, function( err ) {
+	        if ( err ) {
+	          console.error(err);
+	        }
+	      });
+	      extensionName = '{{ '+extName+'("'+name+'") }}';
+	    }
 
-    if ('video-slider' === name || 'channel-slider' === name) {
-      
-      var sliderContext = require(__dirname + '/contexts/slider.js')(entityType,opts);
-      generated += renderer.renderPartial('slider', sliderContext);
+	}
 
-      if ( 'undefined' !== opts.renderData && opts.renderData ) {
-        generated += renderer.renderPartial('bootstrap',{
-          data: {
-            playList: 'channel.videos'
-          }
-        });
-      }
-    }
-
-    if (!isConfig) {
-      generated += '</section>';
-    }
-
-    if (name !== '' && generated !== '') {
-      fs.writeFile(('templates/'+genName+'/'+name+'.tmpl') || '', generated, function(err){
-        if (err) {
-          console.error(err);
-        }
-      });
-    }
-
-    return '{{ '+extName+'("'+name+'") }}';
+    return extensionName;
   }
 };
 

@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+  <li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+    <a href="/" itemprop="url">
+      <span itemprop="title">Home</span>
+    </a>
+  </li>
+  {% for item in channels %}
+    <li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a class="{% if loop.last %}active{% endif %}" href="" itemprop="url">
+        <span itemprop="title">{{item.title|trim}}</span>
+      </a>
+    </li>
+  {% endfor %}  
+</ol>

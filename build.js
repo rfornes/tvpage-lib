@@ -1,12 +1,16 @@
-// Build docs: https://github.com/jrburke/r.js/blob/master/build/example.build.js
+// https://github.com/jrburke/r.js/blob/master/build/example.build.js
 requirejs.config({
   baseUrl: './',
   paths: {
-    jquery: 'vendor/jquery'
+    jquery: 'vendor/jquery',
+    bootstrap: 'vendor/bootstrap'
+  },
+  shim: {
+    deps: ['jquery'] 
   },
   name: 'vendor/almond',
   optimize: 'none',
-  exclude: ['jquery'],
+  exclude: ['jquery','bootstrap'],
   include: ['src/js/tvpage'],
   wrap: {
     start: "(function(root,factory) {\n"+   
